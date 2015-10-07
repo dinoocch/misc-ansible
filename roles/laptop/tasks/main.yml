@@ -1,0 +1,6 @@
+---
+- name: Make sure wpa_supplicant exists
+  file: path=/etc/wpa_supplicant owner=root group=root directory_mode=0755
+
+- name: Set up comet net
+  template: src=wpa_supplicant.conf dest=/etc/wpa_supplicant/wpa_supplicant.conf owner=root group=root more=0600

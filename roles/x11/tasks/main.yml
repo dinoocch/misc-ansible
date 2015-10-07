@@ -1,0 +1,39 @@
+---
+- name: Install software (xbps)
+  xbps: name={{ item }} state=present
+  with_items:
+    - xorg
+    - xterm
+    - dbus
+    - i3
+    - i3status
+    - dmenu
+    - rxvt-unicode
+    - firefox
+    - chromium
+    - thunar
+    - vlc
+    - texlive-bin
+    - feh
+  when: ansible_distribution == "Void"
+
+- name: Install software (Debian/ubuntu)
+  apt: name={{ item }} state=present
+  with_items:
+    - i3
+    - gimp
+    - texlive
+    - vlc
+    - firefox
+    - feh
+  when: ansible_os_family == "Debian"
+
+- name: Copy configuration
+  copy: src={{ item.src }} dest={{ item.dest }} owner=dino group=dino mode=0644
+  with_items:
+    - { src: 'feh/background.jpg', dest: '/home/dino/.background.jpg' }
+    - { src: 'feh/fehbg', dest: '/home/dino/.fehbg' }
+    - { src: 'i3/config', dest: '/home/dino/.i3/config' }
+    - { src: 'i3/i3status.conf', dest: '/home/dino/.i3status.conf' }
+    - { src: 'x/Xresources', dest: '/home/dino/.Xresources' }
+    - { src: 'xinitrc', dest: '/home/dino/.xinitrc' }

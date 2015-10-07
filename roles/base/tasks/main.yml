@@ -1,0 +1,46 @@
+---
+- name: Make sure I exist
+  user:
+    name: dino
+    append: yes
+    createhome: yes
+    groups: audio,video,cdrom,input,users
+    home: /home/dino
+    shell: /bin/zsh
+    generate_ssh_key: yes
+    ssh_key_bits: 4096
+    ssh_key_file: .ssh/id_ed25519
+    ssh_key_type: ed25519
+    state: present
+
+- name: Install software (xbps)
+  xbps: name={{ item }} state=present
+  with_items:
+    - zsh
+    - git
+    - tmux
+    - emacs
+    - ntp
+    - inetutils
+    - tree
+    - openldap
+    - mit-krb5-client
+  when: ansible_distribution == "Void"
+
+- name: Install software (Debian/ubuntu)
+  apt: name={{ item }} state=present
+  with_items:
+    - zsh
+    - git
+    - tmux
+    - emacs
+    - ntp
+  when: ansible_os_family == "Debian"
+
+- name: Copy configuration
+  copy: src={{ item.src }} dest={{ item.dest }} owner=dino group=dino mode=0644
+  with_items:
+    - { src: 'emacs/emacs', dest: '/home/dino/.emacs' }
+    - { src: 'git/gitconfig', dest: '/home/dino/.gitconfig' }
+    - { src: 'prezto', dest: '/home/dino/.zprezto' }
+    - { src: 'tmux/tmux.conf', dest: '/home/dino/.tmux.conf' }

@@ -1,0 +1,3 @@
+set xkbmap us
+xrdb -merge .Xresources
+exec i3

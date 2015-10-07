@@ -1,0 +1,3 @@
+---
+net-id: "{{ lookup('file', 'secret/net-id') }}"
+net-id-password: "{{ lookup('file','secret/net-id-password') }}"

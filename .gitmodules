@@ -1,0 +1,9 @@
+[submodule "roles/base/files/prezto"]
+	path = roles/base/files/prezto
+	url = git@github.com:dinoocch/prezto.git
+[submodule "library/ansible_xbps"]
+	path = library/ansible_xbps
+	url = git@github.com:dinoocch/ansible_xbps.git
+[submodule "library/ansible_ldap"]
+	path = library/ansible_ldap
+	url = git@github.com:dinoocch/ansible_ldap.git
