@@ -25,7 +25,7 @@
     - tree
     - openldap
     - mit-krb5-client
-  when: ansible_distribution == "Void"
+  when: ansible_os_family != "Debian"
 
 - name: Install software (Debian/ubuntu)
   apt: name={{ item }} state=present

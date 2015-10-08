@@ -1,0 +1,69 @@
+---
+- name: Get the Google Chrome Deb
+  get_url:
+    url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    dest: /tmp/google-chrome.deb
+
+- name: Make sure all the dependencies are there
+  xbps: name={{ item }} state=present
+  with_items:
+    - GConf
+    - alsa-lib
+    - atk
+    - glibc
+    - cairo
+    - cups
+    - dbus
+    - dpkg
+    - expat
+    - fontconfig
+    - freetype
+    - libgcc
+    - gdk-puxbuf
+    - glib
+    - gtk2-engines
+    - nspr
+    - nss
+    - pango
+    - libstdc++
+    - libX11
+    - libXcomposite
+    - libXcursor
+    - libXdamage
+    - libXext
+    - libXfixes
+    - libXi
+    - libXrandr
+    - libXrender
+    - libXssl
+    - libXtst
+    - ca-certificates
+    - curl
+    - xdg-utils
+    - wget
+
+- name: Install chromium for good measure
+  xbps: name=chromium state=present
+
+- name: Kill off the old google chrome install
+  file: path=/opt/google state=absent
+
+- name: Make a temporary directory to work in
+  file: path=/tmp/google state=directory owner=root group=root mode=0755
+
+- name: Unpack the new one
+  command: dpkg-deb -R /tmp/google-chrome.deb /tmp/google
+
+- name: Install Google Chrome
+  copy: src={{ item.src }} dest={{ item.dest }} owner=root group=root mode=0644
+  with_items:
+    - { src: '/tmp/google/opt/google', dest: '/opt/' }
+    - { src: '/tmp/google/usr/bin/google-chrome-stable', dest: '/usr/bin/google-chrome-stable' }
+    - { src: '/tmp/google/usr/share/applications/google-chrome.desktop', dest: '/usr/share/applications/google-chrome.desktop' }
+    - { src: '/tmp/google/usr/share/man/man1/google-chrome.1', dest: '/usr/share/man/man1/google-chrome.1' }
+
+- name: Clean up
+  file: path={{ item }} state=absent
+  with_items:
+    - /tmp/google
+    - /tmp/google-chrome.deb
