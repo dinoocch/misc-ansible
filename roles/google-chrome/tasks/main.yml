@@ -19,7 +19,7 @@
     - fontconfig
     - freetype
     - libgcc
-    - gdk-puxbuf
+    - gdk-pixbuf
     - glib
     - gtk2-engines
     - nspr
@@ -35,7 +35,6 @@
     - libXi
     - libXrandr
     - libXrender
-    - libXssl
     - libXtst
     - ca-certificates
     - curl
@@ -55,9 +54,9 @@
   command: dpkg-deb -R /tmp/google-chrome.deb /tmp/google
 
 - name: Install Google Chrome
-  copy: src={{ item.src }} dest={{ item.dest }} owner=root group=root mode=0644
+  command: mv {{ item.src }} {{ item.dest }}
   with_items:
-    - { src: '/tmp/google/opt/google', dest: '/opt/' }
+    - { src: '/tmp/google/opt/google/', dest: '/opt/' }
     - { src: '/tmp/google/usr/bin/google-chrome-stable', dest: '/usr/bin/google-chrome-stable' }
     - { src: '/tmp/google/usr/share/applications/google-chrome.desktop', dest: '/usr/share/applications/google-chrome.desktop' }
     - { src: '/tmp/google/usr/share/man/man1/google-chrome.1', dest: '/usr/share/man/man1/google-chrome.1' }

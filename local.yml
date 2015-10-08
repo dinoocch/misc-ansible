@@ -1,6 +1,4 @@
 ---
 - hosts: laptops
   roles:
-    - base
-    - x11
-    - laptop
+    - google-chrome
