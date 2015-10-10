@@ -15,7 +15,7 @@
     - vlc
     - texlive-bin
     - feh
-  when: ansible_os_family != "Void"
+  when: ansible_lsb_release.id == "Void"
 
 - name: Install software (Debian/ubuntu)
   apt: name={{ item }} state=present
