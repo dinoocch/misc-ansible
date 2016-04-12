@@ -1,6 +1,7 @@
 ---
 - hosts: laptops
   roles:
-    - base
-    - x11
+#    - test-xbps
+#    - base
+#    - x11
     - google-chrome

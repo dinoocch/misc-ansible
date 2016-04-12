@@ -4,45 +4,45 @@
     url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     dest: /tmp/google-chrome.deb
 
-- name: Make sure all the dependencies are there
-  xbps: name={{ item }} state=present
-  with_items:
-    - GConf
-    - alsa-lib
-    - atk
-    - glibc
-    - cairo
-    - cups
-    - dbus
-    - dpkg
-    - expat
-    - fontconfig
-    - freetype
-    - libgcc
-    - gdk-pixbuf
-    - glib
-    - gtk2-engines
-    - nspr
-    - nss
-    - pango
-    - libstdc++
-    - libX11
-    - libXcomposite
-    - libXcursor
-    - libXdamage
-    - libXext
-    - libXfixes
-    - libXi
-    - libXrandr
-    - libXrender
-    - libXtst
-    - ca-certificates
-    - curl
-    - xdg-utils
-    - wget
+#- name: Make sure all the dependencies are there
+#  xbps: name={{ item }} state=present
+#  with_items:
+#    - GConf
+#    - alsa-lib
+#    - atk
+#    - glibc
+#    - cairo
+#    - cups
+#    - dbus
+#    - dpkg
+#    - expat
+#    - fontconfig
+#    - freetype
+#    - libgcc
+#    - gdk-pixbuf
+#    - glib
+#    - gtk2-engines
+#    - nspr
+#    - nss
+#    - pango
+#    - libstdc++
+#    - libX11
+#    - libXcomposite
+#    - libXcursor
+#    - libXdamage
+#    - libXext
+#    - libXfixes
+#    - libXi
+#    - libXrandr
+#    - libXrender
+#    - libXtst
+#    - ca-certificates
+#    - curl
+#    - xdg-utils
+#    - wget
 
-- name: Install chromium for good measure
-  xbps: name=chromium state=present
+#- name: Install chromium for good measure
+#  xbps: name=chromium state=present
 
 - name: Kill off the old google chrome install
   file: path=/opt/google state=absent

@@ -1,0 +1,15 @@
+---
+- name: Try to sync cache
+  xbps: update_cache=yes
+
+- name: Try to upgrade all packages
+  xbps: upgrade=yes
+
+- name: Install
+  xbps: name=python-cups state=present
+
+- name: Update
+  xbps: name=python-cups state=latest
+
+- name: Uninstall
+  xbps: name=python-cups state=absent
