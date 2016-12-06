@@ -2,9 +2,6 @@
 - name: Try to sync cache
   xbps: update_cache=yes
 
-- name: Try to upgrade all packages
-  xbps: upgrade=yes
-
 - name: Install
   xbps: name=python-cups state=present
 
@@ -13,3 +10,18 @@
 
 - name: Uninstall
   xbps: name=python-cups state=absent
+
+- name: Install things
+  xbps:
+    name:
+      - python-cups
+      - wok
+      - python-openssl
+
+- name: Unistall things
+  xbps:
+    name:
+      - python-cups
+      - wok
+      - python-openssl
+    state: absent

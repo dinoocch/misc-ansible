@@ -1,0 +1,12 @@
+---
+#- name: Disable mongodb
+#  sv: name=mongodb enabled=no
+
+- name: Start mongodb
+  sv: name=mongodb state=started
+
+# - name: Restart mongodb
+#   sv: name=mongodb state=restarted
+
+# - name: Enable Mongodb
+#   sv: name=mongodb enabled=yes
